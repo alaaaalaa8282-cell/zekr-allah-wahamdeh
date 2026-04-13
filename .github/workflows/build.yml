@@ -20,16 +20,16 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Setup Gradle
+      - name: Install Gradle
         uses: gradle/actions/setup-gradle@v3
         with:
           gradle-version: '8.2'
 
-      - name: Make gradlew executable
-        run: chmod +x gradlew
-
       - name: Generate Gradle Wrapper
         run: gradle wrapper --gradle-version 8.2
+
+      - name: Make gradlew executable
+        run: chmod +x gradlew
 
       - name: Build Release APK
         run: ./gradlew assembleRelease --no-daemon
@@ -47,14 +47,10 @@ jobs:
           tag_name: v1.0.${{ github.run_number }}
           name: "محمد عبد العظيم لذكر الله - إصدار ${{ github.run_number }}"
           body: |
-            ## تطبيق محمد عبد العظيم لذكر الله 🤲
-            
-            ### المميزات:
-            - 🔔 إشعارات صوتية للأذكار في الخلفية
-            - 📖 أذكار الصباح والمساء (18 ذكر لكل وقت)
-            - 📿 مسبحة إلكترونية
-            - 🚫 لا يتعارض مع المكالمات والأذان
-            - 🖼️ تصميم جميل بصورة والدك
+            تطبيق الأذكار الصوتية 🤲
+            - إشعارات صوتية في الخلفية
+            - أذكار الصباح والمساء
+            - مسبحة إلكترونية
           files: app/build/outputs/apk/release/*.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
